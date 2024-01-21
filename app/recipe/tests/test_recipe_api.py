@@ -57,6 +57,7 @@ class PrivatRecipeAPITests(TestCase):
         self.assertEqual(res.status_code,status.HTTP_200_OK)
         recipes = Recipe.objects.all().order_by('-id')
         serializer = RecipeSerializer(recipes, many =True)
+        self.assertTrue(any(res.data), "API response is empty")
         self.assertEqual(res.data, serializer.data)
 
     def test_recipe_list_limited_to_user(self):
@@ -71,6 +72,7 @@ class PrivatRecipeAPITests(TestCase):
         recipes = Recipe.objects.filter(user=self.user)
         serializer = RecipeSerializer(recipes, many = True)
         self.assertEqual(res.status_code, status.HTTP_200_OK)
+        self.assertTrue(any(res.data), "API response is empty")
         self.assertEqual(res.data, serializer.data)
 
 

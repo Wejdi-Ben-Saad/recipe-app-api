@@ -6,9 +6,10 @@ from rest_framework import serializers
 
 from core.models import Recipe
 
-class RecipeSerializer(serializers.Serializer):
+
+class RecipeSerializer(serializers.ModelSerializer):
     """Serilaizers for recipes."""
     class Meta:
         model = Recipe
-        fields = ['id','title','time_minutes','price','link']
+        fields = ['id', 'title', 'time_minutes', 'price', 'link']
         read_only_field = ['id']
